@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小雪雪</title>
+<style class="cp-pen-styles">
+body{background-color:#2E2E2E;margin:0;overflow:hidden;}
+.lanren-header{color:#fff;}
+#info{color:white;font-family:monospace;}
+canvas{position:absolute;backface-visibility:hidden;-webkit-backface-visibility:hidden;-moz-backface-visibility:hidden;-ms-backface-visibility:hidden;}
+img{position:absolute;cursor:pointer;}
+#container{position:absolute;width:768px;height:485px;left:0;right:0;top:0;bottom:0;margin:auto;}
+	
+	a {text-decoration:none;
+		color: #CCCCCC}
+	
+</style>
+<!--[if IE]>
+	<script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
+<![endif]-->
+</head>
+<body>
+	
+	<embed src="Music/WWYXHQC.mp3" autostart="true" loop="true" hidden="true" starttime="00:20">
+	
+	
+<!-- 代码部分begin -->
+<div class="lanren-container">
+	<div id="container"><p style="position: absolute; z-index: 999; margin-top: 63%; font-family: '幼圆'; color: #0BA761;">嗯.........怎么说呢，不怎么会聊天，也不怎么会写信，
+不知道要怎么开头，索性就略过吧！(手动滑稽）
+下面是正文 嘿嘿
+我在十几岁的年龄遇见你，你成为了我最喜欢的女孩，你对于我来说很重要很重要，感情淡了可以再培养，无话可说了可以试着找话题，虽然现在我不是很了解你，有时候也不会知道你会因为什么生气，有时候我的语言会惹你不开心我也只是想和你有一个很长很长的未来,我特别希望我们能走到最后,如果顺利的话，我可以陪你很久很久 。如果不顺利的话，我就看着你陪别人很久很久我不会和别的女孩子搞暧昧，你吃醋了，不能憋在心里，你很温柔很体贴，也努力爱我，我不会敷衍你，也不会看到信息不回，更不会聊着聊着突然消失，还有你有时候别老是胡思乱想，你要的安全感我都给你.我会有小脾气会黏着你.我脾气上来了都不经大脑.性格比较倔强.希望你能包容我一切.你要好好爱我.然后照顾好我这个小朋友。冷战的时候我也可以坚持很久。久到我连跟你说话的欲望都没有.你怎样都好，不离开就好。面子上什么脾气算什么都没有你重要.我超级粘人，也超级喜欢你。并不是有可无的那一种.是你不理我，我也没办法好好做事，我希望你陪我好久好久 有什么比我们一起走，直到我们不是原来那个只为了新鲜感而谈对象的人，我真的特别想和你走到最后，不会离开，彼此不分开，我好希望好希望我们一直在一起，我觉得等新鲜感过了以后我也会站在你面前，还会像这样一样喜欢你，因为我真的很爱你，希望每一天都快乐，我可以拒绝别人，我会真的真的很难过，我不开心的时候不理你，我的脾气性格都很古怪我想我希望往后余生我们一起走，我希望无论我们之间发生了什么。都要一起挺过来，我希望我们之间出现的种种矛盾 我们一起解决，我希望你有什么事都可以告<span style="font-family: '幼圆'">诉我，我希望我们之间没有任何隔阂，我真的不想输，我们不是玩玩而已，是认真的，因为是你，所以没道理放弃爱你。所以 请你不要不理我。愿我们一起走过这个世界 </span></p></div>
+</div>
+<script src="js/delaunay.js"></script>
+<script src="js/TweenMax.min.js"></script>
+<script src="js/stopExecutionOnTimeout.js?t=1"></script>
+<script>
+const TWO_PI = Math.PI * 2;
+var images = [], imageIndex = 0;
+var image, imageWidth = 768, imageHeight = 485;
+var vertices = [], indices = [], fragments = [];
+var container = document.getElementById('container');
+var clickPosition = [
+    imageWidth * 0.5,
+    imageHeight * 0.5
+];
+window.onload = function () {
+    TweenMax.set(container, { perspective: 500 });
+    var urls = [
+            'image/crayon.jpg',
+            'image/spaceship.jpg',
+            'image/dj.jpg',
+            'image/chicken.jpg',
+		    'image/abc.jpg',
+        ], image, loaded = 0;
+    images[0] = image = new Image();
+    image.onload = function () {
+        if (++loaded === 1) {
+            imagesLoaded();
+            for (var i = 1; i < 5; i++) {
+                if (window.CP.shouldStopExecution(1)) {
+                    break;
+                }
+                images[i] = image = new Image();
+                image.src = urls[i];
+            }
+            window.CP.exitedLoop(1);
+        }
+    };
+    image.src = urls[0];
+};
+function imagesLoaded() {
+    placeImage(false);
+    triangulate();
+    shatter();
+}
+function placeImage(transitionIn) {
+    image = images[imageIndex];
+    if (++imageIndex === images.length)
+        imageIndex = 0;
+    image.addEventListener('click', imageClickHandler);
+    container.appendChild(image);
+    if (transitionIn !== false) {
+        TweenMax.fromTo(image, 0.75, { y: -1000 }, {
+            y: 0,
+            ease: Elastic.easeOut
+        });
+    }
+}
+function imageClickHandler(event) {
+    var box = image.getBoundingClientRect(), top = box.top, left = box.left;
+    clickPosition[0] = event.clientX - left;
+    clickPosition[1] = event.clientY - top;
+    triangulate();
+    shatter();
+}
+function triangulate() {
+    var rings = [
+            {
+                r: 50,
+                c: 12
+            },
+            {
+                r: 150,
+                c: 12
+            },
+            {
+                r: 300,
+                c: 12
+            },
+            {
+                r: 1200,
+                c: 12
+            }
+        ], x, y, centerX = clickPosition[0], centerY = clickPosition[1];
+    vertices.push([
+        centerX,
+        centerY
+    ]);
+    rings.forEach(function (ring) {
+        var radius = ring.r, count = ring.c, variance = radius * 0.25;
+        for (var i = 0; i < count; i++) {
+            if (window.CP.shouldStopExecution(2)) {
+                break;
+            }
+            x = Math.cos(i / count * TWO_PI) * radius + centerX + randomRange(-variance, variance);
+            y = Math.sin(i / count * TWO_PI) * radius + centerY + randomRange(-variance, variance);
+            vertices.push([
+                x,
+                y
+            ]);
+        }
+        window.CP.exitedLoop(2);
+    });
+    vertices.forEach(function (v) {
+        v[0] = clamp(v[0], 0, imageWidth);
+        v[1] = clamp(v[1], 0, imageHeight);
+    });
+    indices = Delaunay.triangulate(vertices);
+}
+function shatter() {
+    var p0, p1, p2, fragment;
+    var tl0 = new TimelineMax({ onComplete: shatterCompleteHandler });
+    for (var i = 0; i < indices.length; i += 3) {
+        if (window.CP.shouldStopExecution(3)) {
+            break;
+        }
+        p0 = vertices[indices[i + 0]];
+        p1 = vertices[indices[i + 1]];
+        p2 = vertices[indices[i + 2]];
+        fragment = new Fragment(p0, p1, p2);
+        var dx = fragment.centroid[0] - clickPosition[0], dy = fragment.centroid[1] - clickPosition[1], d = Math.sqrt(dx * dx + dy * dy), rx = 300 * sign(dy), ry = 900 * -sign(dx), delay = d * 0.003 * randomRange(0.1, 0.25);
+        fragment.canvas.style.zIndex = Math.floor(d).toString();
+        var tl1 = new TimelineMax();
+        tl1.to(fragment.canvas, randomRange(0.25, 1), {
+            z: randomRange(-1500, 1500),
+            rotationX: rx,
+            rotationY: ry,
+            x: randomRange(-2000, 2000),
+            y: randomRange(-2000, 2000),
+            ease: Expo.easeIn
+        });
+        tl1.to(fragment.canvas, 0.4, { alpha: 0 }, 0.6);
+        tl0.insert(tl1, delay);
+        fragments.push(fragment);
+        container.appendChild(fragment.canvas);
+    }
+    window.CP.exitedLoop(3);
+    container.removeChild(image);
+    image.removeEventListener('click', imageClickHandler);
+}
+function shatterCompleteHandler() {
+    fragments.forEach(function (f) {
+        container.removeChild(f.canvas);
+    });
+    fragments.length = 0;
+    vertices.length = 0;
+    indices.length = 0;
+    placeImage();
+}
+function randomRange(min, max) {
+    return min + (max - min) * Math.random();
+}
+function clamp(x, min, max) {
+    return x < min ? min : x > max ? max : x;
+}
+function sign(x) {
+    return x < 0 ? -1 : 1;
+}
+Fragment = function (v0, v1, v2) {
+    this.v0 = v0;
+    this.v1 = v1;
+    this.v2 = v2;
+    this.computeBoundingBox();
+    this.computeCentroid();
+    this.createCanvas();
+    this.clip();
+};
+Fragment.prototype = {
+    computeBoundingBox: function () {
+        var xMin = Math.min(this.v0[0], this.v1[0], this.v2[0]), xMax = Math.max(this.v0[0], this.v1[0], this.v2[0]), yMin = Math.min(this.v0[1], this.v1[1], this.v2[1]), yMax = Math.max(this.v0[1], this.v1[1], this.v2[1]);
+        this.box = {
+            x: xMin,
+            y: yMin,
+            w: xMax - xMin,
+            h: yMax - yMin
+        };
+    },
+    computeCentroid: function () {
+        var x = (this.v0[0] + this.v1[0] + this.v2[0]) / 3, y = (this.v0[1] + this.v1[1] + this.v2[1]) / 3;
+        this.centroid = [
+            x,
+            y
+        ];
+    },
+    createCanvas: function () {
+        this.canvas = document.createElement('canvas');
+        this.canvas.width = this.box.w;
+        this.canvas.height = this.box.h;
+        this.canvas.style.width = this.box.w + 'px';
+        this.canvas.style.height = this.box.h + 'px';
+        this.canvas.style.left = this.box.x + 'px';
+        this.canvas.style.top = this.box.y + 'px';
+        this.ctx = this.canvas.getContext('2d');
+    },
+    clip: function () {
+        this.ctx.translate(-this.box.x, -this.box.y);
+        this.ctx.beginPath();
+        this.ctx.moveTo(this.v0[0], this.v0[1]);
+        this.ctx.lineTo(this.v1[0], this.v1[1]);
+        this.ctx.lineTo(this.v2[0], this.v2[1]);
+        this.ctx.closePath();
+        this.ctx.clip();
+        this.ctx.drawImage(image, 0, 0);
+    }
+};
+</script>
+<!-- 代码部分end -->
+
+
+</body>
+</html>
