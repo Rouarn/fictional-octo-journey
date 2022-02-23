@@ -1,5 +1,5 @@
 #contain{width: 968px; height: 500px;background-image: url("../image/1.jpg");margin-left: auto;margin-right: auto}
-*{margin: 0px}
+*{margin: 0px;text-decoration: none;}
 #header{width: 968px;height: 100px;background-image: url("../image/13.jpg")}
 #boby{width: 968px;height: 600px;background-color:#673419;margin-left: auto;margin-right: auto}
 #baby_l{width: 220px;height: 580px;margin-top: 20px;float: left}
