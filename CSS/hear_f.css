@@ -1,0 +1,5 @@
+.container{overflow:  hidden;padding: 0 20px;}
+.container{padding: 0 20px;}
+a{color: #999;text-decoration: none;outline: none;-moz-transition: all .2s linear 0s;-webkit-transition: all .2s linear;-webkit-transition-delay: 0s;-o-transition: all .2s linear 0s;transition: all .2s linear 0s;}
+a:hover{color: #666;text-decoration: none;}
+table{border-spacing: 0;border-collapse: collapse;}

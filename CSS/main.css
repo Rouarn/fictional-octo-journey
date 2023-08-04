@@ -1,0 +1,51 @@
+#contain{width: 968px; height: 500px;background-image: url("../image/1.jpg");margin-left: auto;margin-right: auto}
+*{margin: 0px;text-decoration: none;}
+#header{width: 968px;height: 100px;background-image: url("../image/13.jpg")}
+#boby{width: 968px;height: 600px;background-color:#673419;margin-left: auto;margin-right: auto}
+#baby_l{width: 220px;height: 580px;margin-top: 20px;float: left}
+.baby1{font-size: 12px;color: azure;width: 220px;height: 280px;background-color: crimson; margin-top: 0px}
+
+#baby_r{width: 728px;height: 580px;margin-top: 10px;float: left;margin-left: 20px;text-align: left;}
+.baby2{font-size: 12px;width: 330px;height: 280px;float: left; margin-top: 10px}
+
+#foot{width: 968px;height: 100px;background-color:#FFFFFF;margin-left: auto;margin-right: auto}
+.foot1{font-size: 12px;color: #000000;width: 968px;height: 20px;line-height: 20px;text-align: center}
+.foot3{font-size: 12px;color: aliceblue;width: 968px;height: 20px;line-height: 20px;text-align: center}
+.foot2 {font-size: 12px;color: aliceblue;width: 968px;height: 20px;line-height: 20px;text-align: center}
+
+#header_t_l{width: 80px;height: 80px;;float:left;font-size: 12px}
+#header_t_r{width: 868px;height: 80px;float: left;padding-left: 20px;font-size: 24px;line-height: 30px;}
+#header_b{width: 968px;height: 20px;background-color: salmon;float:left;font-size: 12px;line-height: 20px}
+
+.menu{width: 191px;height: 20px;background-color: darkblue;float: left;text-align: center;margin-left: 2px;color: #FFFFFF;}
+.menu a{color: aliceblue;text-decoration:none}
+.menu a:hover{background-color: hsla(289,75%,50%,1.00)}
+
+.ZT1 {margin-top: 10px;margin-left: 30px;background-image: url("../image/8.jpg")}
+.ZT2 {margin-top: 10px;margin-left: 10px;background-image: url("../image/9.jpg")}
+.ZT3 {margin-top: 10px;margin-left: 30px;background-image: url("../image/10.jpg")}
+.ZT4 {margin-top: 10px;margin-left: 10px;background-image: url("../image/11.jpg")}
+.h1 {font-style: normal;color: #000000;font-size: 18px;font-weight: 400;text-align: center;margin-top: 20px;font-family: "腾祥爱情体简";}
+
+#FT  {width: 968px;height: 320px;background-color:#612F18;margin-top: auto;margin-bottom: auto;margin-left: auto;margin-right: auto;}
+.FT1 {width: 235px;height: 320px;background-image: url("../image/17.jpg");margin-top: auto;margin-bottom: auto;margin-left: 0px;margin-right: auto;}
+.FT2 {width: 235px;height: 320px;background-image: url("../image/18.jpg");margin-top: -320px;margin-bottom: auto;margin-left: 245px;margin-right: auto;}
+.FT3 {width: 235px;height: 320px;background-image: url("../image/19.jpg");margin-top: -320px;margin-bottom: auto;margin-left: 490px;margin-right: auto;}
+.FT4 {width: 235px;height: 320px;background-image: url("../image/20.jpg");margin-top: -320px;margin-bottom: auto;margin-left: 733px;margin-right: auto;}
+
+#BT1 {font-family: "腾祥爱情体简";color: #FFFDFD;font-size: 16px;text-align: center;}
+#BT2 {font-family: "腾祥爱情体简";color: #FFFDFD;font-size: 16px;text-align: center;}
+#BT3 {font-family: "腾祥爱情体简";color: #FFFDFD;font-size: 16px;text-align: center;}
+#BT4 {font-family: "腾祥爱情体简";color: #FFFDFD;font-size: 16px;text-align: center;}
+
+#SJ {color: #000000;}
+#BATB {margin-top: auto;margin-bottom: auto;margin-left: auto;margin-right: auto;text-align: center;}
+
+#BT1 a:hover {background-color:aqua}
+#BT1 a {text-decoration:none}
+#BT2 a:hover {background-color:aqua}
+#BT2 a {text-decoration:none}
+#BT3 a:hover {background-color:aqua}
+#BT3 a {text-decoration:none}
+#BT4 a:hover {background-color:aqua}
+#BT4 a {text-decoration:none}
